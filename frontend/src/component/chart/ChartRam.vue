@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Chart from "primevue/chart";
-import { bitsToGb } from "../../utils/toGb.ts";
+import { bitsToGb } from "@/utils/toGb";
 
 const props = defineProps({
   freeMemory: {

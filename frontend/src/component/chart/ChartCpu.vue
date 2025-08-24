@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import Chart from "primevue/chart";
-import type { Cpu } from "../../type/osTypes.ts";
+import type { Cpu } from "@/type/osTypes.ts";
+import {config} from "@/utils/config.ts";
 
 const cpuData = ref<Cpu[] | null>(null);
 let interval: number | null = null;
@@ -66,7 +67,7 @@ const chartOptions = {
 
 async function fetchCpuData() {
   try {
-    const response = await fetch('http://localhost:2221');
+    const response = await fetch(`${config.url}/cpu`);
 
     const data = await response.json();
     cpuData.value = data.cpu;
