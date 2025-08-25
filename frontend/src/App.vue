@@ -4,7 +4,6 @@ import ChartCpu from "@/component/chart/ChartCpu.vue";
 import type { SystemInfo } from "./type/osTypes.ts";
 import { ref, onMounted } from "vue";
 import { bitsToGb } from "@/utils/toGb.ts";
-import { config } from "@/utils/config.ts";
 
 const systemInfo = ref<SystemInfo | null>(null);
 const hostname = import.meta.env.VITE_HOSTNAME || 'unknown';
@@ -12,7 +11,7 @@ const hostname = import.meta.env.VITE_HOSTNAME || 'unknown';
 
 async function loadSystemInfo() {
   try {
-    const response = await fetch(config.url);
+    const response = await fetch('/api');
     systemInfo.value = await response.json();
   } catch (error) {
     console.error("Failed to load system info:", error);
