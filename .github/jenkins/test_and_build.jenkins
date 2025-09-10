@@ -15,10 +15,17 @@ pipeline {
             }
         }
 
-        stage('Build Docker') {
+        stage('Build Docker Forntend') {
             steps {
-                echo 'Docker build'
-                sh 'docker build -t your-image-name:latest /vagrant/docker'
+                echo 'Docker build frontend'
+                sh 'cd frontend & docker build -t frontend:latest /vagrant/docker'
+            }
+        }
+
+        stage('Build Docker Backend') {
+            steps {
+                echo 'Docker build backend'
+                sh 'cd backend & docker build -t backend:latest /vagrant/docker'
             }
         }
     }
