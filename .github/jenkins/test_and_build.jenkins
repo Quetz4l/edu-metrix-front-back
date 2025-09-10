@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/Quetz4l/edu-metrix-front-back.git'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Tests'
+                sh 'npm run lint'
+            }
+        }
+
+        stage('Build Docker') {
+            steps {
+                echo 'Docker build'
+                sh 'docker build -t your-image-name:latest /vagrant/docker'
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo 'the tests failed'
+        }
+        success {
+            echo 'the tests were successful'
+        }
+    }
+}
