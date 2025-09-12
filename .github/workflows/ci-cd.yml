@@ -42,9 +42,15 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: Install dependencies
-        run: cd frontend && npm ci
-      - name: Deploy
+      - name: Install dependencies for frontend and Deploy
         run: |
-          cp -r frontend /path/to/frontend/dir
+          cd frontend && npm ci
+          cp -r frontend vagrant/docker/frontend
           pm2 restart frontend-app
+
+      - name: Install dependencies for backend and Deploy
+        run: |
+          cd backend && npm ci
+          cp -r backend vagrant/docker/backend
+          pm2 restart backend-app
+        
