@@ -27,7 +27,6 @@ jobs:
         run: cd frontend && npm run lint
 
   deploy:
-    if: github.ref == 'refs/heads/main'
     needs: lint
     runs-on: self-hosted
     steps:
